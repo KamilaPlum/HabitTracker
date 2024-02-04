@@ -31,14 +31,18 @@ const Login = () => {
 
     const handleSubmit = () => {
         if (login === 'test' && password === 'test') {
-            navigate('/habbits')
+            navigate('/habits')
         }
         setError('Error login')
     }
 
     return (
         <form>
-            <Input
+
+            <TextField
+                id="outlined-basic"
+                label="Outlined"
+                variant="outlined"
                 placeholder='Your email'
                 sx={{
                     color: 'purple',
@@ -47,7 +51,13 @@ const Login = () => {
                 }}
                 onChange={handleChangeLogin}
             />
-            <Input
+            <TextField
+                error
+                id="standard-error-helper-text"
+                label="Error"
+                defaultValue="Hello World"
+                helperText="Incorrect entry."
+                variant="standard"
                 placeholder='Your password'
                 sx={{color: 'purple'}}
                 onChange={handleChangePassword}
@@ -64,7 +74,7 @@ const Login = () => {
                     > Error</Box>
                 )
             }
-            <div>
+            <Box>
                 <Button
                     onClick={handleSubmit}
                     sx={{
@@ -77,7 +87,7 @@ const Login = () => {
                     }
                 }}
                 >Submit</Button>
-            </div>
+            </Box>
         </form>
     );
 };

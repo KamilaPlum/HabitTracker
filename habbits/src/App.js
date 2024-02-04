@@ -2,16 +2,15 @@ import { Box } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
 import { Layout, Login } from './pages/Login'
 import "./App.css";
-import Habbits from "./pages/Habbits/Habbits";
+import Habits from "./pages/Habits/Habits";
 
 function App() {
-  const isLoggedIn = false;
+  const isLoggedIn = true;
 
   return (
     <Box
       sx={{
-        display: "flex",
-        alignItems: "center",
+        height: "100%"
       }}
     >
       <Routes>
@@ -22,7 +21,7 @@ function App() {
                   <Route path={"reset"} element={<>Reset </>} />
               </Route>
           }
-        {isLoggedIn && <Route path="/" element={<Habbits />} />}
+        {<Route path="/habits" element={<Habits />} />}
       </Routes>
     </Box>
   );
