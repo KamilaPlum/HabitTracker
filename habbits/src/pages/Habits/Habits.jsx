@@ -34,7 +34,7 @@ const Habits = () => {
                         height: "300px",
                         border: "1px solid grey",
                     }}
-                > Diagramm </Box>
+                > Diagram </Box>
                 {/*components diagram*/}
                 <Box
                     sx={{

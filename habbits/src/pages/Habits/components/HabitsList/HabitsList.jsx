@@ -1,7 +1,7 @@
 import React from 'react';
 //layout Grid
 import {Box} from "@mui/material"
-
+import HabitItem from './HabitItem'
 //TODO redux-toolkit
 const mockHabits = [
     {
@@ -41,7 +41,7 @@ const HabitsList = () => {
                 maxHeight: "300px",
                 height: "300px",
                 overflow: "auto",
-                width: "632px"
+                width: "100%"
             }}
         >
             {
@@ -49,20 +49,7 @@ const HabitsList = () => {
                     const { name, targetValue, currentValue } = item;
 
                     return (
-                        <Box sx={{
-                            height: "30px",
-                            border: '1px solid #b0b0ff',
-                            display: 'flex',
-                            marginBottom: '20px',
-                            width: '400px',
-                            background: '#b0b0ff',
-                            borderRadius: '20px',
-                            position: "relative"
-                        }}>
-                            <Box sx={{ height: "100%", width: "30%", background: "pink"}}></Box>
-                            <Box sx={{ position: "absolute", left: "60px"}}> {item.name} 50%</Box>
-
-                        </Box>
+                        <HabitItem name={item.name} value={64}/>
                     )
                 })
             }

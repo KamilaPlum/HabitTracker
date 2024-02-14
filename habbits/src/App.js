@@ -1,12 +1,14 @@
 import { Box } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
+import { useSelector} from "react-redux";
 import { Layout, Login } from './pages/Login'
+
 import "./App.css";
 import Habits from "./pages/Habits/Habits";
 
 function App() {
-  const isLoggedIn = true;
-
+  const isLogged = useSelector((state) => state.auth.isLogged);
+  console.log('isLogged', isLogged);
   return (
     <Box
       sx={{
@@ -14,14 +16,18 @@ function App() {
       }}
     >
       <Routes>
-          {!isLoggedIn &&
-              <Route path="/" element={<Layout />}>
-                  <Route index element={<Login />} />
-                  <Route path={"login"} element={<Login />} />
-                  <Route path={"reset"} element={<>Reset </>} />
-              </Route>
-          }
-        {<Route path="/habits" element={<Habits />} />}
+          <>
+              {!isLogged &&
+                  <Route path="/" element={<Layout />}>
+                      <Route index element={<Login />} />
+                      <Route path={"login"} element={<Login />} />
+                      <Route path={"reset"} element={<>Reset </>} />
+                  </Route>
+              }
+              {
+                  isLogged && (<Route path="/habits" element={<Habits />} />)
+              }
+          </>
       </Routes>
     </Box>
   );

@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import {useNavigate} from "react-router-dom";
+import { useDispatch } from "react-redux";
 import {Button, Input, TextField, Box } from "@mui/material";
+import { login } from '../../Store/reducers/auth'
 //Box  - div
 //TextField - input
 // how send data  to form -  react hook form
 const Login = () => {
-    const [login, setLogin] = useState('')
+    const dispatch = useDispatch();
+    const [loginData, setLogin] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState(null);
 
@@ -30,7 +33,11 @@ const Login = () => {
     };
 
     const handleSubmit = () => {
-        if (login === 'test' && password === 'test') {
+        //get data from server
+        // ? answer true / false  data
+
+        if (loginData === 'test' && password === 'test') {
+            dispatch(login(true));
             navigate('/habits')
         }
         setError('Error login')
