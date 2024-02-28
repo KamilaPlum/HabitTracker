@@ -1,34 +1,35 @@
-import React from 'react';
-//layout Grid
+import React, { useEffect, useState } from 'react';
 import {Box} from "@mui/material"
 import HabitItem from './HabitItem'
-//TODO redux-toolkit
-const mockHabits = [
-    {
-        id: 1,
-        name: 'Walk',
-        startTime: null,
-        endTime: null,
-        currentTime: null,
-        area: ['health', 'happiness'],
-        type: 'time',
-        targetValue: 60,
-        currentValue: 35,
-    },
-    {
-        id: 2,
-        name: 'No caffeine',
-        startTime: null,
-        endTime: null,
-        currentTime: null,
-        area: ['health', 'happiness'],
-        type: 'done',
-        targetValue: true,
-        currentValue: false,
-    },
-]
+import { useSelector} from "react-redux";
+import { db } from '../../../../index';
+import { collection, getDocs }  from 'firebase/firestore';
+
+
 
 const HabitsList = () => {
+    const [habitsList, setHabitsList] = useState([]);
+
+    // const habitsList  = useSelector((state) => {
+    //     debugger;
+    //     return state.habits;
+    // });
+
+    const collectionRef = collection(db, 'habits')
+
+    useEffect(() => {
+        const getHabits = async () => {
+            const data = await getDocs(collectionRef);
+            setHabitsList(data.docs.map((doc) => ({...doc.data(), id: doc.id })))
+
+        }
+        getHabits();
+    }, []);
+
+    if (!habitsList) {
+        return (<>Error</>)
+    }
+    console.log(habitsList)
     return (
         <Box
             sx={{
@@ -45,11 +46,10 @@ const HabitsList = () => {
             }}
         >
             {
-                mockHabits.map((item, index) => {
+                habitsList.map((item, index) => {
                     const { name, targetValue, currentValue } = item;
-
                     return (
-                        <HabitItem name={item.name} value={64}/>
+                        <HabitItem name={name} value={currentValue}/>
                     )
                 })
             }
